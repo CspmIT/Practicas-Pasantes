@@ -3,17 +3,19 @@ import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuIt
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { Link, useNavigate } from 'react-router-dom'
 import { navigation } from './utils/js/objects'
+import { Button } from '@mui/material';
+
 
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
+	return classes.filter(Boolean).join(' ')
 }
 
 export default function Navbar() {
 	const navigate = useNavigate()
 	const goFormulario = (link) => {
-		navigate(link)
-	}
+		navigate(link)}
+
 	return (
 		<Disclosure as='nav' className='bg-gray-800 fixed w-full top-0 left-0'>
 			<div className='mx-auto max-w-7xl px-2 sm:px-6 lg:px-8'>
@@ -35,9 +37,9 @@ export default function Navbar() {
 							<div className='flex space-x-4'>
 								{navigation.map((item, index) => (
 									// <Link to={item.link}>{item.name}</Link> otra forma
-									<button key={index} onClick={() => goFormulario(item.link)}>
+									<Button key={index} onClick={() => goFormulario(item.link)}>
 										{item.name}
-									</button> 
+									</Button>
 								))}
 							</div>
 						</div>

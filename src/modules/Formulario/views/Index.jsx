@@ -1,12 +1,36 @@
 import React from 'react'
 import ButtonUser from '../../../components/ButtonUser/Index'
-import Inputs from '../../../components/Inputs/Index'
 import { MenuItem, TextField } from '@mui/material'
+import { Controller, useForm } from 'react-hook-form'
+
 
 const Index = () => {
+	const { control, handleSubmit, formState: { errors } } = useForm();
+	const onSubmit = (data) => {
+		console.log(data);
+	}
 	return (
 		<>
-			<form>
+			<form onSubmit={handleSubmit(onSubmit)}>
+				<Controller
+					name='name'
+					control={control}
+					rules={{ required: 'El nombre es obligatorio' }}
+					render={({ field }) => (
+						<TextField
+							{...field}
+							label={'Nombre'}
+							variant='outlined'
+							error={!!errors.name}
+							helperText={errors.name?.message}
+						/>
+					)}
+				/>
+				<button type='submit'></button>
+			</form>
+
+
+			{/* <form>
 				<Inputs key={1} id={'Nombre'} label={'Nombre'} type={'text'} placeholder={'Tu nombre'} />
 				<Inputs key={2} id={'Apellido'} label={'Apellido'} type={'text'} placeholder={'Tu apellido '} />
 				<Inputs key={3} id={'Fecha'} label={'Fecha Nacimiento'} type={'date'} />
@@ -20,9 +44,9 @@ const Index = () => {
 						Existente
 					</MenuItem>
 				</Inputs>
-	
-				<ButtonUser props={{ texto: 'Agregar', bg: 'bg-red-500' }} />
-			</form>
+			</form> */}
+
+			<ButtonUser props={{ texto: 'Agregar', bg: 'bg-red-500' }} />
 		</>
 	)
 }
